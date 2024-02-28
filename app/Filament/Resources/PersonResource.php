@@ -7,6 +7,7 @@ use App\Filament\Resources\PersonResource\Pages;
 use App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
 use Filament\Forms;
+use Filament\Forms\Components\Datepicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -50,9 +51,9 @@ class PersonResource extends Resource
                     ->columns(2)
                     ->description('Führerscheindaten und letzte Prüfung')
                     ->schema([
-                        Forms\Components\Datepicker::make('license_issue_date')->required()
+                        Datepicker::make('license_issue_date')->required()
                             ->native(false),
-                        Forms\Components\Datepicker::make('last_license_check_date')->required()
+                        Datepicker::make('last_license_check_date')->required()
                             ->native(false)
                             ->default('now'),
                     ]),
