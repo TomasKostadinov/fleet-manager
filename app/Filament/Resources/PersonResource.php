@@ -52,10 +52,8 @@ class PersonResource extends Resource
                     ->columns(2)
                     ->description('Führerscheindaten und letzte Prüfung')
                     ->schema([
-                        Datepicker::make('license_issue_date')->required()
-                            ->native(false),
+                        Datepicker::make('license_issue_date')->required(),
                         Datepicker::make('last_license_check_date')->required()
-                            ->native(false)
                             ->default('now'),
                     ]),
                 Section::make('Bemerkungen')
