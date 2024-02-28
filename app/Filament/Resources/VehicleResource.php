@@ -8,7 +8,9 @@ use App\Filament\Resources\VehicleResource\Pages;
 use App\Filament\Resources\VehicleResource\RelationManagers;
 use App\Models\Vehicle;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontFamily;
@@ -41,11 +43,11 @@ class VehicleResource extends Resource
                     ->collapsible()
                     ->description('Grundlegende Informationen zum Fahrzeug.')
                     ->schema([
-                        Forms\Components\TextInput::make('manufacturer')->required(),
-                        Forms\Components\TextInput::make('model')->required(),
-                        Forms\Components\TextInput::make('seats')->required(),
-                        Forms\Components\TextInput::make('doors')->required(),
-                        Forms\Components\TextInput::make('kw')->numeric()->required(),
+                        TextInput::make('manufacturer')->required(),
+                        TextInput::make('model')->required(),
+                        TextInput::make('seats')->required(),
+                        TextInput::make('doors')->required(),
+                        TextInput::make('kw')->numeric()->required(),
                         Forms\Components\Select::make('transmission')
                             ->options(Transmission::class),
                         Forms\Components\Select::make('fuel_type')
@@ -57,10 +59,10 @@ class VehicleResource extends Resource
                     ->persistCollapsed()
                     ->description('Informationen zur Registrierung und TÜV-Prüfung')
                     ->schema([
-                        Forms\Components\TextInput::make('registration_plate')->required(),
-                        Forms\Components\TextInput::make('chassis_number')->required(),
-                        Forms\Components\Datepicker::make('registration_date')->required(),
-                        Forms\Components\Datepicker::make('tuev_valid_until')->required(),
+                        TextInput::make('registration_plate')->required(),
+                        TextInput::make('chassis_number')->required(),
+                        DatePicker::make('registration_date')->required(),
+                        Datepicker::make('tuev_valid_until')->required(),
                     ]),
             ]);
     }
