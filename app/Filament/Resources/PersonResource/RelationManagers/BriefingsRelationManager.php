@@ -5,9 +5,18 @@ namespace App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
 use App\Models\Vehicle;
 use Filament\Forms;
+use Filament\Forms\Components\Datepicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Actions\CreateAction;
+use Filament\Tables\Actions\DeleteAction;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Actions\ForceDeleteAction;
+use Filament\Tables\Actions\RestoreAction;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -23,13 +32,13 @@ class BriefingsRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('vehicle_id')
+                Select::make('vehicle_id')
                     ->options(Vehicle::all()->pluck('display_name', 'id'))
                     ->searchable(),
-                Forms\Components\Select::make('issuer_id')
+                Select::make('issuer_id')
                     ->options(Person::all()->pluck('full_name', 'id'))
                     ->searchable(),
-                Forms\Components\Datepicker::make('issue_date')->required()
+                Datepicker::make('issue_date')->required()
                     ->native(false)
                     ->default('now'),
             ]);
@@ -40,21 +49,21 @@ class BriefingsRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('vehicle.display_name')
             ->columns([
-                Tables\Columns\TextColumn::make('vehicle.display_name')->label('Fahrzeug'),
-                Tables\Columns\TextColumn::make('issuer.full_name')->label('Einweiser'),
-                Tables\Columns\TextColumn::make('issue_date')->date('d.m.Y')->label('Datum'),
+                TextColumn::make('vehicle.display_name')->label('Fahrzeug'),
+                TextColumn::make('issuer.full_name')->label('Einweiser'),
+                TextColumn::make('issue_date')->date('d.m.Y')->label('Datum'),
             ])
             ->filters([
-                Tables\Filters\TrashedFilter::make()
+                TrashedFilter::make()
             ])
             ->headerActions([
-                Tables\Actions\CreateAction::make(),
+                CreateAction::make(),
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
+                EditAction::make(),
+                DeleteAction::make(),
+                ForceDeleteAction::make(),
+                RestoreAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
