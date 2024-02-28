@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone')->unique()->nullable()->default(null);
             $table->date('license_issue_date')->nullable()->default(null);
             $table->date('last_license_check_date')->nullable()->default(null);
-            $table->text('notes')->default("");
+            $table->text('notes')->nullable()->default(null);
         });
     }
 

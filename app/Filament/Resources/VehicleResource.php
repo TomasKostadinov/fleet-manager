@@ -50,10 +50,11 @@ class VehicleResource extends Resource
                             ->options(Transmission::class),
                         Forms\Components\Select::make('fuel_type')
                             ->options(FuelType::class),
-                    ])->collapsible(),
+                    ])->collapsible()->persistCollapsed(),
                 Section::make('Registrierung')
                     ->columns()
                     ->collapsible()
+                    ->persistCollapsed()
                     ->description('Informationen zur Registrierung und TÜV-Prüfung')
                     ->schema([
                         Forms\Components\TextInput::make('registration_plate')->required(),
@@ -73,9 +74,8 @@ class VehicleResource extends Resource
                     ->copyable()
                     ->weight(FontWeight::Bold)
                     ->fontFamily(FontFamily::Mono),
-                Tables\Columns\TextColumn::make('model'),
                 Tables\Columns\TextColumn::make('manufacturer'),
-                Tables\Columns\TextColumn::make('chassis_number'),
+                Tables\Columns\TextColumn::make('model'),
                 Tables\Columns\TextColumn::make('fuel_type')->badge()
                     ->color(fn(FuelType $state): string => match ($state) {
                         FuelType::Petrol => 'info',
@@ -83,7 +83,6 @@ class VehicleResource extends Resource
                         FuelType::Electric => 'success',
                         FuelType::Hybrid => 'success',
                     }),
-                Tables\Columns\TextColumn::make('registration_date')->dateTime('d.m.Y'),
                 Tables\Columns\TextColumn::make('tuev_valid_until')->dateTime('d.m.Y'),
             ])
             ->filters([

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\FuelType;
 use App\Filament\Resources\PersonResource\Pages;
 use App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
@@ -9,6 +10,8 @@ use Filament\Forms;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontFamily;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
 
@@ -38,19 +41,25 @@ class PersonResource extends Resource
                         Forms\Components\TextInput::make('last_name')->required(),
                         Forms\Components\TextInput::make('email')->email(),
                         Forms\Components\TextInput::make('phone'),
-                    ])->collapsible(),
+                    ])
+                    ->collapsible()
+                    ->persistCollapsed(),
                 Section::make('Führerscheindaten')
                     ->collapsible()
+                    ->persistCollapsed()
                     ->columns(2)
                     ->description('Führerscheindaten und letzte Prüfung')
                     ->schema([
-                        Forms\Components\Datepicker::make('license_issue_date')->required(),
-                        Forms\Components\Datepicker::make('last_license_check_date')->required(),
+                        Forms\Components\Datepicker::make('license_issue_date')->required()
+                            ->native(false),
+                        Forms\Components\Datepicker::make('last_license_check_date')->required()
+                            ->native(false)
+                            ->default('now'),
                     ]),
                 Section::make('Bemerkungen')
                     ->collapsible()
                     ->schema([
-                        Forms\Components\RichEditor::make('notes'),
+                        Forms\Components\RichEditor::make('notes')->default(null),
                     ]),
             ]);
     }
@@ -59,7 +68,15 @@ class PersonResource extends Resource
     {
         return $table
             ->columns([
-                //
+                Tables\Columns\TextColumn::make('last_name')
+                    ->sortable()
+                    ->copyable(),
+                Tables\Columns\TextColumn::make('first_name')
+                    ->sortable()
+                    ->copyable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->copyable(),
+                Tables\Columns\TextColumn::make('last_license_check_date')->dateTime('d.m.Y'),
             ])
             ->filters([
                 //
