@@ -44,4 +44,14 @@ class Vehicle extends Model
         'fuel_type' => FuelType::class,
         'transmission' => Transmission::class,
     ];
+
+    public function briefings()
+    {
+        return $this->hasMany(VehicleBriefing::class, 'vehicle_id');
+    }
+
+    public function allowed_drivers()
+    {
+        return $this->hasManyThrough(Person::class, VehicleBriefing::class);
+    }
 }

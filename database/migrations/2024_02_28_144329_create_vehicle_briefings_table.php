@@ -12,22 +12,22 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('vehicle_briefings', function (Blueprint $table) {
-            $table->id();
+            $table->ulid('id')->primary()->unique();
             $table->timestamps();
             $table->date('issue_date');
-            $table->ulid('vehicle_id')->nullable()->default(null);
+            $table->ulid('vehicle_id');
             $table->foreign('vehicle_id')
                 ->references('id')
                 ->on('vehicles')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->ulid('person_id')->nullable()->default(null);
+            $table->ulid('person_id');
             $table->foreign('person_id')
                 ->references('id')
-                ->on('vehicles')
+                ->on('people')
                 ->onUpdate('cascade')
                 ->onDelete('cascade');
-            $table->ulid('issuer_id')->nullable()->default(null);
+            $table->ulid('issuer_id');
             $table->foreign('issuer_id')
                 ->references('id')
                 ->on('people')

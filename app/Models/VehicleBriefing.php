@@ -29,4 +29,19 @@ class VehicleBriefing extends Model
     protected $casts = [
         'issue_date' => 'datetime',
     ];
+
+    public function vehicle()
+    {
+        return $this->belongsTo(Vehicle::class);
+    }
+
+    public function person()
+    {
+        return $this->belongsTo(Person::class);
+    }
+
+    public function issuer()
+    {
+        return $this->belongsTo(Person::class);
+    }
 }

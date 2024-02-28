@@ -37,4 +37,25 @@ class Person extends Model
         'license_issue_date' => 'datetime',
         'last_license_check_date' => 'datetime',
     ];
+
+    public function briefings()
+    {
+        return $this->hasMany(VehicleBriefing::class, 'person_id');
+    }
+
+    public function has_briefed()
+    {
+        return $this->hasMany(VehicleBriefing::class, 'issuer_id');
+    }
+
+    public function allowed_vehicles()
+    {
+        return $this->hasManyThrough(Vehicle::class, VehicleBriefing::class);
+    }
+
+    // combine first and last name as full name
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
 }
