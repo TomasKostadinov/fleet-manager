@@ -1,0 +1,16 @@
+@import '/vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+
+.fi-sidebar-header {
+    @apply bg-primary-500 border-r-transparent;
+}
+
+.fi-sidebar {
+    @apply !bg-white border-r border-gray-200;
+}
+
+.fi-topbar nav {
+    @apply !bg-primary-500;
+}
