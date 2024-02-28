@@ -6,10 +6,11 @@ use App\Enums\FuelType;
 use App\Enums\Transmission;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vehicle extends Model
 {
-    use HasUlids;
+    use HasUlids, SoftDeletes;
 
         /**
          * The attributes that are mass assignable.

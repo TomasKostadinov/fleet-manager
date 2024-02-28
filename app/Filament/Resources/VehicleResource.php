@@ -15,10 +15,20 @@ use Filament\Support\Enums\FontFamily;
 use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\HtmlString;
 
 class VehicleResource extends Resource
 {
     protected static ?string $model = Vehicle::class;
+
+    protected static ?string $label = 'Fahrzeug';
+    protected static ?string $pluralLabel = 'Fahrzeuge';
+    public static function getGloballySearchableAttributes(): array
+    {
+        return ['model', 'manufacturer', 'registration_plate'];
+    }
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -27,7 +37,8 @@ class VehicleResource extends Resource
         return $form
             ->schema([
                 Section::make('Fahrzeugdaten')
-                    ->aside()
+                    ->columns()
+                    ->collapsible()
                     ->description('Grundlegende Informationen zum Fahrzeug.')
                     ->schema([
                         Forms\Components\TextInput::make('manufacturer')->required(),
@@ -39,9 +50,10 @@ class VehicleResource extends Resource
                             ->options(Transmission::class),
                         Forms\Components\Select::make('fuel_type')
                             ->options(FuelType::class),
-                    ]),
+                    ])->collapsible(),
                 Section::make('Registrierung')
-                    ->aside()
+                    ->columns()
+                    ->collapsible()
                     ->description('Informationen zur Registrierung und TÜV-Prüfung')
                     ->schema([
                         Forms\Components\TextInput::make('registration_plate')->required(),
@@ -103,5 +115,10 @@ class VehicleResource extends Resource
             'view' => Pages\ViewVehicle::route('/{record}'),
             'edit' => Pages\EditVehicle::route('/{record}/edit'),
         ];
+    }
+
+    public static function getGlobalSearchResultTitle(Model $record): string|Htmlable
+    {
+        return new HtmlString("<b>{$record->registration_plate}</b> ({$record->manufacturer} {$record->model})");
     }
 }
