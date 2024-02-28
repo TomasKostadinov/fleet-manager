@@ -9,6 +9,7 @@ use App\Models\Person;
 use Filament\Forms;
 use Filament\Forms\Components\Datepicker;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Support\Enums\FontFamily;
@@ -38,10 +39,10 @@ class PersonResource extends Resource
                     ->description('Grundlegende Informationen zum Person.')
                     ->columns(2)
                     ->schema([
-                        Forms\Components\TextInput::make('first_name')->required(),
-                        Forms\Components\TextInput::make('last_name')->required(),
-                        Forms\Components\TextInput::make('email')->email(),
-                        Forms\Components\TextInput::make('phone'),
+                        TextInput::make('first_name')->required(),
+                        TextInput::make('last_name')->required(),
+                        TextInput::make('email')->email(),
+                        TextInput::make('phone'),
                     ])
                     ->collapsible()
                     ->persistCollapsed(),
