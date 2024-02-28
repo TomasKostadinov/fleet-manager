@@ -74,16 +74,22 @@ class VehicleResource extends Resource
                     ->copyable()
                     ->weight(FontWeight::Bold)
                     ->fontFamily(FontFamily::Mono),
-                Tables\Columns\TextColumn::make('manufacturer'),
-                Tables\Columns\TextColumn::make('model'),
-                Tables\Columns\TextColumn::make('fuel_type')->badge()
+                Tables\Columns\TextColumn::make('manufacturer')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('model')
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('fuel_type')
+                    ->sortable()
+                    ->badge()
                     ->color(fn(FuelType $state): string => match ($state) {
                         FuelType::Petrol => 'info',
                         FuelType::Diesel => 'primary',
                         FuelType::Electric => 'success',
                         FuelType::Hybrid => 'success',
                     }),
-                Tables\Columns\TextColumn::make('tuev_valid_until')->dateTime('d.m.Y'),
+                Tables\Columns\TextColumn::make('tuev_valid_until')
+                    ->sortable()
+                    ->dateTime('d.m.Y'),
             ])
             ->filters([
                 //
@@ -111,7 +117,6 @@ class VehicleResource extends Resource
         return [
             'index' => Pages\ListVehicles::route('/'),
             'create' => Pages\CreateVehicle::route('/create'),
-            'view' => Pages\ViewVehicle::route('/{record}'),
             'edit' => Pages\EditVehicle::route('/{record}/edit'),
         ];
     }
