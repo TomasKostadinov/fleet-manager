@@ -4,9 +4,12 @@ namespace App\Filament\Resources\VehicleResource\RelationManagers;
 
 use App\Models\Person;
 use Filament\Forms;
+use Filament\Forms\Components\Datepicker;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables;
+use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
 class VehicleBriefingRelationManager extends RelationManager
@@ -20,13 +23,13 @@ class VehicleBriefingRelationManager extends RelationManager
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('person_id')
+                Select::make('person_id')
                     ->options(Person::all()->pluck('full_name', 'id'))
                     ->searchable(),
-                Forms\Components\Select::make('issuer_id')
+                Select::make('issuer_id')
                     ->options(Person::all()->pluck('full_name', 'id'))
                     ->searchable(),
-                Forms\Components\Datepicker::make('issue_date')->required()
+                Datepicker::make('issue_date')->required()
                     ->native(false)
                     ->default('now'),
             ]);
@@ -37,9 +40,9 @@ class VehicleBriefingRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('person.full_name')
             ->columns([
-                Tables\Columns\TextColumn::make('person.full_name')->label('Fahrer'),
-                Tables\Columns\TextColumn::make('issuer.full_name')->label('Einweiser'),
-                Tables\Columns\TextColumn::make('issue_date')->date('d.m.Y')->label('Datum'),
+                TextColumn::make('person.full_name')->label('Fahrer'),
+                TextColumn::make('issuer.full_name')->label('Einweiser'),
+                TextColumn::make('issue_date')->date('d.m.Y')->label('Datum'),
             ])
             ->filters([
                 //
