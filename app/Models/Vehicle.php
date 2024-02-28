@@ -54,4 +54,9 @@ class Vehicle extends Model
     {
         return $this->hasManyThrough(Person::class, VehicleBriefing::class);
     }
+
+    public function getDisplayNameAttribute()
+    {
+        return "{$this->registration_plate} ({$this->manufacturer} {$this->model})";
+    }
 }

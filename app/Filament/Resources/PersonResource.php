@@ -94,7 +94,7 @@ class PersonResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\BriefingsRelationManager::class
         ];
     }
 
