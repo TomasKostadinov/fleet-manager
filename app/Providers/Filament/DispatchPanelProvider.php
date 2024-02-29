@@ -56,7 +56,6 @@ class DispatchPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ])
-            ->spa();
+            ]);
     }
 }
