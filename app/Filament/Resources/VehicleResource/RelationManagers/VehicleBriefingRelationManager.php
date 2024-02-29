@@ -4,7 +4,7 @@ namespace App\Filament\Resources\VehicleResource\RelationManagers;
 
 use App\Models\Person;
 use Filament\Forms;
-use Filament\Forms\Components\Datepicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
