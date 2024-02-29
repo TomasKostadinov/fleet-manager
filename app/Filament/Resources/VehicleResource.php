@@ -39,9 +39,8 @@ class VehicleResource extends Resource
         return $form
             ->schema([
                 Section::make('Fahrzeugdaten')
-                    ->columns()
-                    ->collapsible()
                     ->description('Grundlegende Informationen zum Fahrzeug.')
+                    ->columns()
                     ->schema([
                         TextInput::make('manufacturer')->required(),
                         TextInput::make('model')->required(),

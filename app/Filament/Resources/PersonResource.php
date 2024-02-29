@@ -37,7 +37,7 @@ class PersonResource extends Resource
             ->schema([
                 Section::make('Personendaten')
                     ->description('Grundlegende Informationen zum Person.')
-                    ->columns(2)
+                    ->columns()
                     ->schema([
                         TextInput::make('first_name')->required(),
                         TextInput::make('last_name')->required(),
@@ -52,8 +52,10 @@ class PersonResource extends Resource
                     ->columns(2)
                     ->description('Führerscheindaten und letzte Prüfung')
                     ->schema([
-                        Datepicker::make('license_issue_date')->required(),
+                        Datepicker::make('license_issue_date')->required()
+                            ->native(false),
                         Datepicker::make('last_license_check_date')->required()
+                            ->native(false)
                             ->default('now'),
                     ]),
                 Section::make('Bemerkungen')
