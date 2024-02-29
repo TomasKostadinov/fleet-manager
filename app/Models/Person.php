@@ -25,6 +25,7 @@ class Person extends Model
         'license_issue_date',
         'last_license_check_date',
         'notes',
+        'blue_light_rights',
     ];
 
 
@@ -36,6 +37,7 @@ class Person extends Model
     protected $casts = [
         'license_issue_date' => 'datetime',
         'last_license_check_date' => 'datetime',
+        'blue_light_rights' => 'boolean',
     ];
 
     public function briefings()

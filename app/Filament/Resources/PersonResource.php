@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -36,10 +37,17 @@ class PersonResource extends Resource
                     ->description('Grundlegende Informationen zum Person.')
                     ->columns()
                     ->schema([
-                        TextInput::make('first_name')->required(),
-                        TextInput::make('last_name')->required(),
-                        TextInput::make('email')->email(),
-                        TextInput::make('phone'),
+                        TextInput::make('first_name')
+                            ->label('Vorname')
+                            ->required(),
+                        TextInput::make('last_name')
+                            ->label('Nachname')
+                            ->required(),
+                        TextInput::make('email')
+                            ->label('E-Mail')
+                            ->email(),
+                        TextInput::make('phone')
+                            ->label('Telefon')
                     ])
                     ->collapsible()
                     ->persistCollapsed(),
@@ -49,16 +57,24 @@ class PersonResource extends Resource
                     ->columns(2)
                     ->description('Führerscheindaten und letzte Prüfung')
                     ->schema([
-                        Datepicker::make('license_issue_date')->required()
+                        DatePicker::make('license_issue_date')->required()
+                            ->label('Ausstellungsdatum')
                             ->native(false),
-                        Datepicker::make('last_license_check_date')->required()
+                        DatePicker::make('last_license_check_date')->required()
+                            ->label('Letzte Prüfung')
                             ->native(false)
                             ->default('now'),
+                        Toggle::make('blue_light_rights')
+                            ->label('Sonder- und Wegerechte')
+                            ->onColor('blue')
+                            ->offColor('black')
                     ]),
                 Section::make('Bemerkungen')
                     ->collapsible()
                     ->schema([
-                        Forms\Components\RichEditor::make('notes')->default(null),
+                        Forms\Components\RichEditor::make('notes')
+                            ->label('Notizen')
+                            ->default(null),
                     ]),
             ]);
     }

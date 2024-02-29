@@ -24,12 +24,16 @@ class VehicleBriefingRelationManager extends RelationManager
         return $form
             ->schema([
                 Select::make('person_id')
+                    ->label('Fahrer')
                     ->options(Person::all()->pluck('full_name', 'id'))
                     ->searchable(),
                 Select::make('issuer_id')
+                    ->label('Einweiser')
                     ->options(Person::all()->pluck('full_name', 'id'))
                     ->searchable(),
-                Datepicker::make('issue_date')->required()
+                Datepicker::make('issue_date')
+                    ->label('Datum der Einweisung')
+                    ->required()
                     ->native(false)
                     ->default('now'),
             ]);
@@ -40,9 +44,21 @@ class VehicleBriefingRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('person.full_name')
             ->columns([
-                TextColumn::make('person.full_name')->label('Fahrer'),
-                TextColumn::make('issuer.full_name')->label('Einweiser'),
-                TextColumn::make('issue_date')->date('d.m.Y')->label('Datum'),
+                TextColumn::make('person.full_name')
+                    ->label('Fahrer')
+                    ->sortable(),
+                TextColumn::make('issuer.full_name')
+                    ->label('Einweiser')
+                    ->sortable(),
+                TextColumn::make('issue_date')
+                    ->date('d.m.Y')
+                    ->label('Datum')
+                    ->sortable(),
+                Tables\Columns\ToggleColumn::make('person.blue_light_rights')
+                    ->sortable()
+                    ->label('Sonder- und Wegerechte')
+                    ->onColor('blue')
+                    ->offColor('black'),
             ])
             ->filters([
                 //
