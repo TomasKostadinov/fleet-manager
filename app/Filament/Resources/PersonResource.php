@@ -2,18 +2,15 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\FuelType;
 use App\Filament\Resources\PersonResource\Pages;
 use App\Filament\Resources\PersonResource\RelationManagers;
 use App\Models\Person;
 use Filament\Forms;
-use Filament\Forms\Components\Datepicker;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Support\Enums\FontFamily;
-use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Table;
 
