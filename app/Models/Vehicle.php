@@ -59,4 +59,18 @@ class Vehicle extends Model
     {
         return "{$this->registration_plate} ({$this->manufacturer} {$this->model})";
     }
+
+    public function odometerReadings()
+    {
+        return $this->hasMany(OdometerReading::class);
+    }
+
+    public function getLastOdometerReadingAttribute()
+    {
+        return $this->odometerReadings->sortByDesc('date')->first();
+    }
+    public function getFirstOdometerReadingAttribute()
+    {
+        return $this->odometerReadings->sortBy('date')->first();
+    }
 }

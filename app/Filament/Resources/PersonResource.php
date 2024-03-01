@@ -13,6 +13,8 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\TernaryFilter;
 use Filament\Tables\Table;
 
 class PersonResource extends Resource
@@ -85,16 +87,20 @@ class PersonResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('last_name')
                     ->sortable()
+                    ->searchable()
                     ->copyable(),
                 Tables\Columns\TextColumn::make('first_name')
                     ->sortable()
+                    ->searchable()
                     ->copyable(),
                 Tables\Columns\TextColumn::make('email')
                     ->copyable(),
-                Tables\Columns\TextColumn::make('last_license_check_date')->dateTime('d.m.Y'),
+                Tables\Columns\TextColumn::make('last_license_check_date')
+                    ->dateTime('d.m.Y'),
             ])
             ->filters([
-                //
+                TernaryFilter::make('blue_light_rights')
+                    ->label('Sonder- und Wegerechte')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

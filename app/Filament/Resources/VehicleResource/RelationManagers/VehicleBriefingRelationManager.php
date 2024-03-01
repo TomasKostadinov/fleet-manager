@@ -31,7 +31,7 @@ class VehicleBriefingRelationManager extends RelationManager
                     ->label('Einweiser')
                     ->options(Person::all()->pluck('full_name', 'id'))
                     ->searchable(),
-                Datepicker::make('issue_date')
+                DatePicker::make('issue_date')
                     ->label('Datum der Einweisung')
                     ->required()
                     ->native(false)

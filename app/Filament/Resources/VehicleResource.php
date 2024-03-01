@@ -27,6 +27,7 @@ class VehicleResource extends Resource
 
     protected static ?string $label = 'Fahrzeug';
     protected static ?string $pluralLabel = 'Fahrzeuge';
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['model', 'manufacturer', 'registration_plate'];
@@ -72,13 +73,16 @@ class VehicleResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('registration_plate')
                     ->sortable()
+                    ->searchable()
                     ->copyable()
                     ->weight(FontWeight::Bold)
                     ->fontFamily(FontFamily::Mono),
                 Tables\Columns\TextColumn::make('manufacturer')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('model')
-                    ->sortable(),
+                    ->sortable()
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('fuel_type')
                     ->sortable()
                     ->badge()
@@ -109,7 +113,8 @@ class VehicleResource extends Resource
     public static function getRelations(): array
     {
         return [
-            RelationManagers\VehicleBriefingRelationManager::class
+            RelationManagers\VehicleBriefingRelationManager::class,
+            RelationManagers\OdometerReadingRelationManager::class
         ];
     }
 
