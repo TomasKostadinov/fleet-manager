@@ -10,6 +10,7 @@ use App\Models\Vehicle;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -66,6 +67,22 @@ class VehicleResource extends Resource
                         DatePicker::make('registration_date')->required(),
                         Datepicker::make('tuev_valid_until')->required(),
                     ]),
+                Section::make('Dateien')
+                    ->collapsible()
+                    ->collapsed()
+                    ->schema([
+                        SpatieMediaLibraryFileUpload::make('document')
+                            ->label('Dateien')
+                            ->collection('documents')
+                            ->visibility('private')
+                            ->multiple()
+                            ->removeUploadedFileButtonPosition('right')
+                            ->uploadButtonPosition('left')
+                            ->uploadProgressIndicatorPosition('left')
+                            ->openable()
+                            ->downloadable()
+                            ->previewable()
+                    ]),
             ]);
     }
 
@@ -102,7 +119,6 @@ class VehicleResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

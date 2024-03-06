@@ -7,10 +7,12 @@ use App\Enums\Transmission;
 use Illuminate\Database\Eloquent\Concerns\HasUlids;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Vehicle extends Model
+class Vehicle extends Model implements HasMedia
 {
-    use HasUlids, SoftDeletes;
+    use InteractsWithMedia, HasUlids, SoftDeletes;
 
         /**
          * The attributes that are mass assignable.
@@ -72,5 +74,10 @@ class Vehicle extends Model
     public function getFirstOdometerReadingAttribute()
     {
         return $this->odometerReadings->sortBy('date')->first();
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('documents')->useDisk('s3');
     }
 }
