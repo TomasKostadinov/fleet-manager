@@ -46,14 +46,26 @@ class VehicleResource extends Resource
                     ->description('Grundlegende Informationen zum Fahrzeug.')
                     ->columns()
                     ->schema([
-                        TextInput::make('manufacturer')->required(),
-                        TextInput::make('model')->required(),
-                        TextInput::make('seats')->required(),
-                        TextInput::make('doors')->required(),
-                        TextInput::make('kw')->numeric()->required(),
+                        TextInput::make('manufacturer')
+                            ->required()
+                            ->label('Hersteller'),
+                        TextInput::make('model')
+                            ->required()
+                            ->label('Modell'),
+                        TextInput::make('seats')
+                            ->required()
+                            ->label('Sitzplätze'),
+                        TextInput::make('doors')
+                            ->required()
+                            ->label('Türen'),
+                        TextInput::make('kw')->numeric()
+                            ->required()
+                            ->label('Leistung (kW)'),
                         Forms\Components\Select::make('transmission')
+                            ->label('Getriebe')
                             ->options(Transmission::class),
                         Forms\Components\Select::make('fuel_type')
+                            ->label('Kraftstoff')
                             ->options(FuelType::class),
                     ])->collapsible()->persistCollapsed(),
                 Section::make('Registrierung')
@@ -62,10 +74,18 @@ class VehicleResource extends Resource
                     ->persistCollapsed()
                     ->description('Informationen zur Registrierung und TÜV-Prüfung')
                     ->schema([
-                        TextInput::make('registration_plate')->required(),
-                        TextInput::make('chassis_number')->required(),
-                        DatePicker::make('registration_date')->required(),
-                        Datepicker::make('tuev_valid_until')->required(),
+                        TextInput::make('registration_plate')
+                            ->required()
+                            ->label('Kennzeichen'),
+                        TextInput::make('chassis_number')
+                            ->required()
+                            ->label('Fahrgestellnummer'),
+                        DatePicker::make('registration_date')
+                            ->required()
+                            ->label('Erstzulassung'),
+                        Datepicker::make('tuev_valid_until')
+                            ->required()
+                            ->label('TÜV gültig bis'),
                     ]),
                 Section::make('Dateien')
                     ->collapsible()
