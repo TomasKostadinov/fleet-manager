@@ -28,10 +28,15 @@ class DispatchPanelProvider extends PanelProvider
             ->path('dispatch')
             ->colors([
                 'blue' => '#7dd3fc',
+                'red' => '#e30613',
                 'black' => '#000000',
                 'green' => '#00ff66',
             ])
             ->login()
+            ->passwordReset()
+            ->emailVerification()
+            ->registration()
+            ->profile()
             ->viteTheme('resources/css/filament/dispatch/theme.css')
             ->colors([
                 'primary' => "#e30613",

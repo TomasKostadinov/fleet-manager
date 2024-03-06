@@ -26,6 +26,8 @@ class PersonResource extends Resource
     protected static ?string $pluralLabel = 'Personen';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    protected static ?string $navigationGroup = 'Verwaltung';
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['first_name', 'last_name'];
