@@ -91,18 +91,22 @@ class VehicleResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('registration_plate')
+                    ->label('Kennzeichen')
                     ->sortable()
                     ->searchable()
                     ->copyable()
                     ->weight(FontWeight::Bold)
                     ->fontFamily(FontFamily::Mono),
                 Tables\Columns\TextColumn::make('manufacturer')
+                    ->label('Hersteller')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('model')
+                    ->label('Modell')
                     ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('fuel_type')
+                    ->label('Kraftstoff')
                     ->sortable()
                     ->badge()
                     ->color(fn(FuelType $state): string => match ($state) {
@@ -112,6 +116,7 @@ class VehicleResource extends Resource
                         FuelType::Hybrid => 'success',
                     }),
                 Tables\Columns\TextColumn::make('tuev_valid_until')
+                    ->label('TÜV gültig bis')
                     ->sortable()
                     ->dateTime('d.m.Y'),
             ])
