@@ -28,6 +28,8 @@ class VehicleResource extends Resource
     protected static ?string $label = 'Fahrzeug';
     protected static ?string $pluralLabel = 'Fahrzeuge';
 
+    protected static ?string $navigationGroup = 'Flottenmanagement';
+
     public static function getGloballySearchableAttributes(): array
     {
         return ['model', 'manufacturer', 'registration_plate'];
