@@ -29,6 +29,7 @@ class DispatchPanelProvider extends PanelProvider
             ->colors([
                 'blue' => '#7dd3fc',
                 'black' => '#000000',
+                'green' => '#00ff66',
             ])
             ->login()
             ->viteTheme('resources/css/filament/dispatch/theme.css')
